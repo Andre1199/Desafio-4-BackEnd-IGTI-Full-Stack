@@ -1,8 +1,21 @@
 import { db } from '../models/index.js';
 import { logger } from '../config/logger.js';
+import gradeModel from '../models/gradeModel.js';
+
+const GradeModel = db.gradeModel;
 
 const create = async (req, res) => {
+  const grade = (new gradeModel() = {
+    name: req.body.name,
+    subject: req.body.subject,
+    type: req.body.type,
+    value: req.body.value,
+    lastModified: req.body.lastModified,
+  });
+
   try {
+    const data = await grade.save();
+
     res.send({ message: 'Grade inserido com sucesso' });
     logger.info(`POST /grade - ${JSON.stringify()}`);
   } catch (error) {
@@ -17,11 +30,14 @@ const findAll = async (req, res) => {
   const name = req.query.name;
 
   //condicao para o filtro no findAll
-  var condition = name
+  let condition = name
     ? { name: { $regex: new RegExp(name), $options: 'i' } }
     : {};
 
   try {
+    const data = await Bank.find({ condition });
+    res.send(data);
+
     logger.info(`GET /grade`);
   } catch (error) {
     res
@@ -33,6 +49,14 @@ const findAll = async (req, res) => {
 
 const findOne = async (req, res) => {
   const id = req.params.id;
+
+  const data = await GradeModel.findById({ _id: id });
+
+  if (!data) {
+    res.send('Não encontrado');
+  } else {
+    res.send(data);
+  }
 
   try {
     logger.info(`GET /grade - ${id}`);
@@ -52,6 +76,8 @@ const update = async (req, res) => {
   const id = req.params.id;
 
   try {
+    GradeModel.findByIdAndUpdate({ _id: id }, req.body, { new: true });
+
     logger.info(`PUT /grade - ${id} - ${JSON.stringify(req.body)}`);
   } catch (error) {
     res.status(500).send({ message: 'Erro ao atualizar a Grade id: ' + id });
@@ -63,6 +89,8 @@ const remove = async (req, res) => {
   const id = req.params.id;
 
   try {
+    const data = GradeModel.findByIdAndRemove({ _id: id });
+
     logger.info(`DELETE /grade - ${id}`);
   } catch (error) {
     res
@@ -83,6 +111,6 @@ const removeAll = async (req, res) => {
 
 const teste = async (req, res) => {
   console.log(Teste);
-}
+};
 
 export default { create, findAll, findOne, update, remove, removeAll, teste };
