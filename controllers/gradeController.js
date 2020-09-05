@@ -81,4 +81,8 @@ const removeAll = async (req, res) => {
   }
 };
 
-export default { create, findAll, findOne, update, remove, removeAll };
+const teste = async (req, res) => {
+  console.log(Teste);
+}
+
+export default { create, findAll, findOne, update, remove, removeAll, teste };
