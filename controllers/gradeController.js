@@ -35,7 +35,7 @@ const findAll = async (req, res) => {
     : {};
 
   try {
-    const data = await Bank.find({ condition });
+    const data = await GradeModel.find({ condition });
     res.send(data);
 
     logger.info(`GET /grade`);
