@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-
+import { gradeRouter } from '../grades-api/routes/gradeRouter.js';
 import { db } from './models/index.js';
 
 (async () => {
@@ -25,6 +25,7 @@ app.use(
     origin: 'https://grades-front-end.herokuapp.com',
   })
 );
+app.use(gradeRouter);
 
 app.get('/', (req, res) => {
   res.send('API em execucao');
