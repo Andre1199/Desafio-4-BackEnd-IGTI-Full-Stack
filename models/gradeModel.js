@@ -1,4 +1,3 @@
-const { Mongoose } = require("mongoose");
 export default (mongoose) => {
     const schema = mongoose.Schema({
       name: {
