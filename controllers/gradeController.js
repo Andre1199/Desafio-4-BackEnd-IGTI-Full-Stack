@@ -5,7 +5,7 @@ import gradeModel from '../models/gradeModel.js';
 const GradeModel = db.gradeModel;
 
 const create = async (req, res) => {
-  const grade = (new gradeModel() = {
+  const grade = new gradeModel({
     name: req.body.name,
     subject: req.body.subject,
     type: req.body.type,
