@@ -110,7 +110,7 @@ const removeAll = async (req, res) => {
 };
 
 const teste = async (req, res) => {
-  console.log(Teste);
+  console.log('Teste');
 };
 
 export default { create, findAll, findOne, update, remove, removeAll, teste };
